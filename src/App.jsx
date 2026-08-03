@@ -81,15 +81,109 @@
 
 // export default App;
 
+// import React from 'react';
+
+// function App() {
+//   return (
+    
+      
+//        <h2> Hello, Entertainment App is Working! 🎉</h2>
+      
+    
+//   );
+// }
+
+// export default App;
+
+// import React from 'react';
+// import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
+// // तुमचे पेजेस इथे import करा (तुमच्या फोल्डरनुसार पाथ तपासा)
+// // import Login from './pages/Login';
+// // import SignUp from './pages/SignUp';
+// // import Movies from './pages/Movies';
+
+// function App() {
+//   return (
+    
+      
+        
+//           {/* जेव्हा तुम्ही पेजेस बनवाल, तेव्हा हे कंमेंट्स (//) काढून टाका */}
+//           {/* } /> */}
+//           {/* } /> */}
+//           {/* } /> */}
+          
+//           Router is Working! Now add pages.} />
+        
+      
+    
+//   );
+// }
+
+// export default App;
+
+// import React from 'react';
+// import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
+// function App() {
+//   return (
+//     <Router>
+//       <div className="bg-gray-900 min-h-screen text-white">
+//         <Routes>
+//           <Route path="/" element={<h1 className="text-center mt-10 text-3xl font-bold">Router is Working! Now add pages.</h1>} />
+//         </Routes>
+//       </div>
+//     </Router>
+//   );
+// }
+
+// export default App;
+
+// import React from 'react';
+// import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
+// // तुमचे पेजेस इथे import करा
+// import Login from './pages/Login'; 
+// import SignUp from './pages/SignUp';
+// import Movies from './pages/Movies';
+
+// function App() {
+//   return (
+    
+      
+        
+//           {/* आता आपण डमी मेसेज काढून आपले खरे पेजेस जोडले आहेत */}
+//           } />
+//           } />
+//           } />
+        
+      
+    
+//   );
+// }
+
+// export default App;
+
+
 import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
+// तुमचे पेजेस import करत आहोत
+import Login from './pages/Login'; 
+import SignUp from './pages/SignUp';
+import Movies from './pages/Movies';
 
 function App() {
   return (
-    
-      
-       <h2> Hello, Entertainment App is Working! 🎉</h2>
-      
-    
+    <Router>
+      <div className="bg-gray-900 min-h-screen text-white">
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/movies" element={<Movies />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
