@@ -1,33 +1,37 @@
+
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 function SignUp() {
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
   const handleSignUp = async (e) => {
-    e.preventDefault();
+    e.preventDefault(); 
     
     try {
-      
+      // 💡 लक्ष द्या: इंटरनेटवर टाकण्यापूर्वी इथे तुमचा लाईव्ह बॅकएंड URL टाका.
+      // (उदा. 'https://tumcha-backend.netlify.app/.netlify/functions/api/signup')
       const response = await fetch('http://localhost:8888/.netlify/functions/api/signup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password })
+        body: JSON.stringify({ name, email, password })
       });
       
       const data = await response.json();
       
       if (response.ok) {
-        alert("Account created successfully! 🎉 Now please Login.");
+        alert("Account created successfully! 🎉 Please Sign In.");
+        
         navigate('/'); 
       } else {
         alert("Error: " + data.message);
       }
     } catch (error) {
       console.error("Signup failed:", error);
-      alert("Network Error! Please try again.");
+      alert("Network Error! Please check your backend connection.");
     }
   };
 
@@ -37,6 +41,14 @@ function SignUp() {
         <h1 className="text-3xl font-bold mb-6 text-center text-red-600">Sign Up</h1>
         
         <form onSubmit={handleSignUp} className="flex flex-col gap-4">
+          <input 
+            type="text" 
+            placeholder="Full Name" 
+            className="p-3 rounded bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-red-600"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+          />
           <input 
             type="email" 
             placeholder="Email Address" 
@@ -61,7 +73,7 @@ function SignUp() {
         </form>
         
         <p className="mt-4 text-gray-400 text-center">
-          Already have an account? <Link to="/" className="text-white hover:underline">Login now.</Link>
+          Already have an account? <Link to="/" className="text-white hover:underline">Sign in.</Link>
         </p>
       </div>
     </div>
