@@ -1,60 +1,72 @@
-// import React from 'react'
-// import './Login.css'
-// const Login = () => {
-//   return (
-//     <div className='login'>
-      
-//     </div>
-//   )
-// }
-
-// export default Login
-
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
-const Login = () => {
+function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
-  const handleLogin = (e) => {
-    e.preventDefault();
-    console.log("Login Details:", { email, password });
-    // भविष्यात इथे आपण आपल्या बॅकएंड API ला रिक्वेस्ट पाठवू
+  const handleLogin = async (e) => {
+    e.preventDefault(); 
+    
+    try {
+      // ⚠️ जेव्हा तुम्ही फ्रन्टएंड इंटरनेटवर टाकाल, तेव्हा 'http://localhost:8888' च्या जागी तुमची लाईव्ह Netlify ची लिंक टाका.
+      const response = await fetch('http://localhost:8888/.netlify/functions/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password })
+      });
+      
+      const data = await response.json();
+      
+      if (response.ok) {
+        localStorage.setItem('token', data.token);
+        alert("Login successful! 🎉 Welcome to Netflix Clone.");
+        navigate('/movies'); // पासवर्ड बरोबर असल्यास Movies पेजवर जाणे
+      } else {
+        alert("Error: " + data.message);
+      }
+    } catch (error) {
+      console.error("Login failed:", error);
+      alert("Network Error! Is the backend server running?");
+    }
   };
 
   return (
-    <div className="flex justify-center items-center h-screen bg-gray-900">
-      <form onSubmit={handleLogin} className="bg-black p-8 rounded-lg shadow-lg w-96 flex flex-col">
-        <h1 className="text-3xl text-white font-bold mb-6">Sign In</h1>
+    <div className="bg-gray-900 min-h-screen flex items-center justify-center text-white">
+      <div className="bg-gray-800 p-8 rounded-lg shadow-lg w-96">
+        <h1 className="text-3xl font-bold mb-6 text-center text-red-600">Sign In</h1>
         
-        <input 
-          type="email" 
-          placeholder="Email Address" 
-          className="p-3 mb-4 rounded bg-gray-800 text-white border-none"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
+        <form onSubmit={handleLogin} className="flex flex-col gap-4">
+          <input 
+            type="email" 
+            placeholder="Email Address" 
+            className="p-3 rounded bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-red-600"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+          <input 
+            type="password" 
+            placeholder="Password" 
+            className="p-3 rounded bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-red-600"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+          <button 
+            type="submit" 
+            className="bg-red-600 hover:bg-red-700 p-3 rounded font-bold transition duration-300">
+            Sign In
+          </button>
+        </form>
         
-        <input 
-          type="password" 
-          placeholder="Password" 
-          className="p-3 mb-6 rounded bg-gray-800 text-white border-none"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        
-        <button type="submit" className="bg-red-600 text-white font-bold py-3 rounded">
-          Login
-        </button>
-        
-        <p className="text-gray-400 mt-4 text-sm">
-          New to App? <Link to="/signup" className="text-white hover:underline">Sign up now.</Link>
+        <p className="mt-4 text-gray-400 text-center">
+          New to Netflix? <Link to="/signup" className="text-white hover:underline">Sign up now.</Link>
         </p>
-      </form>
+      </div>
     </div>
   );
 }
 
 export default Login;
-
