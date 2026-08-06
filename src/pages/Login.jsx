@@ -10,7 +10,7 @@ function Login() {
     
     try {
       
-      const response = await fetch('http://localhost:8888/.netlify/functions/api/login', {
+      const response = await fetch('https://prashntmondhenetfleex-clone.netlify.app/.netlify/functions/api/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password })
@@ -21,10 +21,7 @@ function Login() {
       if (response.ok) {
         localStorage.setItem('token', data.token);
         alert("Login successful! 🎉 Welcome to Netflix Clone.");
-        
-        
-        //window.location.href = '/movies'; 
-        window.location.href = '/home';
+        window.location.href = '/home'; 
       } else {
         alert("Error: " + data.message);
       }

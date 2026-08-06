@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
@@ -12,9 +11,8 @@ function SignUp() {
     e.preventDefault(); 
     
     try {
-      // 💡 लक्ष द्या: इंटरनेटवर टाकण्यापूर्वी इथे तुमचा लाईव्ह बॅकएंड URL टाका.
-      // (उदा. 'https://tumcha-backend.netlify.app/.netlify/functions/api/signup')
-      const response = await fetch('http://localhost:8888/.netlify/functions/api/signup', {
+      
+      const response = await fetch('https://prashntmondhenetfleex-clone.netlify.app/.netlify/functions/api/signup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, email, password })
@@ -24,7 +22,6 @@ function SignUp() {
       
       if (response.ok) {
         alert("Account created successfully! 🎉 Please Sign In.");
-        
         navigate('/'); 
       } else {
         alert("Error: " + data.message);
