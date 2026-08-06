@@ -12,13 +12,13 @@ function Bookmarks() {
   }, []);
 
   const removeBookmark = (e, id) => {
-    e.stopPropagation(); // क्लिक केल्यावर पेज बदलण्यापासून रोखण्यासाठी
+    e.stopPropagation(); 
     const updatedBookmarks = bookmarkedItems.filter(item => item.id !== id);
     setBookmarkedItems(updatedBookmarks);
     localStorage.setItem('bookmarks', JSON.stringify(updatedBookmarks));
   };
 
-  // आयटम चित्रपट आहे की टीव्ही सिरीज हे ठरवण्यासाठी
+  
   const handleCardClick = (item) => {
     if (item.title) {
       navigate(`/movie/${item.id}`);

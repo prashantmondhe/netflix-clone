@@ -10,7 +10,7 @@ function Login() {
     e.preventDefault(); 
     
     try {
-      // ⚠️ जेव्हा तुम्ही फ्रन्टएंड इंटरनेटवर टाकाल, तेव्हा 'http://localhost:8888' च्या जागी तुमची लाईव्ह Netlify ची लिंक टाका.
+      
       const response = await fetch('http://localhost:8888/.netlify/functions/api/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -22,7 +22,7 @@ function Login() {
       if (response.ok) {
         localStorage.setItem('token', data.token);
         alert("Login successful! 🎉 Welcome to Netflix Clone.");
-        navigate('/movies'); // पासवर्ड बरोबर असल्यास Movies पेजवर जाणे
+        navigate('/movies'); 
       } else {
         alert("Error: " + data.message);
       }

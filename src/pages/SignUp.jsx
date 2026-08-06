@@ -10,7 +10,7 @@ function SignUp() {
     e.preventDefault();
     
     try {
-      // ⚠️ जेव्हा तुम्ही फ्रन्टएंड इंटरनेटवर टाकाल, तेव्हा 'http://localhost:8888' च्या जागी तुमची लाईव्ह Netlify ची लिंक टाका.
+      
       const response = await fetch('http://localhost:8888/.netlify/functions/api/signup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -21,7 +21,7 @@ function SignUp() {
       
       if (response.ok) {
         alert("Account created successfully! 🎉 Now please Login.");
-        navigate('/'); // खाते बनल्यावर युझरला Login पेजवर घेऊन जाणे
+        navigate('/'); 
       } else {
         alert("Error: " + data.message);
       }

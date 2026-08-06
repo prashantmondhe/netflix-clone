@@ -9,7 +9,7 @@ function Login() {
     e.preventDefault(); 
     
     try {
-      // (तुमची API लिंक - जर तुम्ही इंटरनेटवर टाकणार असाल तर इथे लाईव्ह लिंक द्या)
+      
       const response = await fetch('http://localhost:8888/.netlify/functions/api/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -22,7 +22,7 @@ function Login() {
         localStorage.setItem('token', data.token);
         alert("Login successful! 🎉 Welcome to Netflix Clone.");
         
-        // 💡 ब्रह्मास्त्र: थेट JavaScript द्वारे पेज बदलणे
+        
         //window.location.href = '/movies'; 
         window.location.href = '/home';
       } else {

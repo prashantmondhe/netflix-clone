@@ -8,7 +8,7 @@ function MovieDetails() {
   const [loading, setLoading] = useState(true);
 
   const API_KEY = "c94b5daa72ba816c62bf91d73c35852b"; 
-  // चित्रपटाची माहिती आणि कास्ट (credits) एकत्र आणण्यासाठी
+ 
   const API_URL = `https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}&append_to_response=credits`;
 
   useEffect(() => {
@@ -29,7 +29,7 @@ function MovieDetails() {
       <Navbar />
       <div className="p-10 flex flex-col md:flex-row gap-10 max-w-6xl mx-auto mt-8">
         
-        {/* डावी बाजू: पोस्टर */}
+        
         <div className="w-full md:w-1/3">
           <img 
             src={`https://image.tmdb.org/t/p/w500${details.poster_path}`} 
@@ -38,7 +38,7 @@ function MovieDetails() {
           />
         </div>
 
-        {/* उजवी बाजू: माहिती */}
+        
         <div className="w-full md:w-2/3 flex flex-col gap-4">
           <h1 className="text-4xl font-bold">{details.title}</h1>
           <p className="text-xl text-yellow-400">⭐ {details.vote_average.toFixed(1)} / 10</p>

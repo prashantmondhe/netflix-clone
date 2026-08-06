@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Navbar from '../components/Navbar'; // 💡 Navbar ॲड केला
+import Navbar from '../components/Navbar'; 
 
 function Movies() {
   const [movies, setMovies] = useState([]);
-  const [searchQuery, setSearchQuery] = useState(""); // 💡 सर्चसाठी नवीन स्टेट
+  const [searchQuery, setSearchQuery] = useState("");
   const [bookmarks, setBookmarks] = useState([]);
   const navigate = useNavigate();
 
@@ -16,7 +16,7 @@ function Movies() {
 
     const fetchMovies = async () => {
       try {
-        // जर युझरने काही सर्च केले असेल, तर Search API कॉल करा, अन्यथा Trending API
+        
         const url = searchQuery 
           ? `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${searchQuery}` 
           : `https://api.themoviedb.org/3/trending/movie/week?api_key=${API_KEY}`;
@@ -29,7 +29,7 @@ function Movies() {
       }
     };
     
-    // टाईपिंग करताना प्रत्येक अक्षरावर API कॉल जाऊ नये म्हणून थोडा Delay (Debounce)
+   
     const timeoutId = setTimeout(() => {
       fetchMovies();
     }, 500);
@@ -38,7 +38,7 @@ function Movies() {
   }, [searchQuery]);
 
   const toggleBookmark = (e, movie) => {
-    e.stopPropagation(); // 💡 हे अत्यंत महत्त्वाचे आहे, यामुळे कार्डवरील क्लिक इव्हेंट थांबतो आणि फक्त Bookmark होतो.
+    e.stopPropagation(); 
     let updatedBookmarks = [...bookmarks];
     const isBookmarked = updatedBookmarks.find(b => b.id === movie.id);
     
@@ -57,7 +57,7 @@ function Movies() {
       <Navbar />
       <div className="p-8">
         
-        {/* 💡 Search Bar */}
+        
         <div className="mb-8 flex items-center bg-[#161D2F] p-3 rounded-lg w-full md:w-1/2 mx-auto">
           <span className="text-gray-400 text-xl mr-3">🔍</span>
           <input 
@@ -75,7 +75,7 @@ function Movies() {
         
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
           {movies.map((movie) => (
-            // 💡 कार्डवर क्लिक केल्यास MovieDetails पेजवर नेणे
+           
             <div 
               key={movie.id} 
               onClick={() => navigate(`/movie/${movie.id}`)}
@@ -87,7 +87,7 @@ function Movies() {
                 className="w-full h-auto object-cover opacity-90 hover:opacity-100" 
               />
               
-              {/* Bookmark बटण */}
+             
               <button 
                 onClick={(e) => toggleBookmark(e, movie)}
                 className="absolute top-2 right-2 bg-black bg-opacity-70 text-white p-2 rounded-full hover:bg-gray-700 transition"
